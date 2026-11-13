@@ -1,5 +1,7 @@
 # DeckCraft roadmap
 
+> **2026-11-13, personal build:** remove social-service controls and links; preserve this customization when merging reviewed upstream updates.
+
 **Stage: alpha** · next: beta, ~20 points and ~120–210 h away
 
 > **Last reviewed:** 2026-11-04 · **Last updated:** 2026-11-04 · **Change:** trivial (Ogg Opus recovery includes trailing packets without granules in its reported duration; parity scores unchanged) · **Target:** Microsoft PowerPoint for Mac 16.113 (Microsoft 365)
