@@ -138,7 +138,6 @@ pub const UI_COMMANDS: &[(&str, &str, Option<&str>, &str)] = &[
         "{layout?, perPage?, slides?, includeHidden?, frame?, paper?: letter|a4|legal|a3, orientation?: portrait|landscape}",
     ),
     ("app.about", "About DeckCraft", None, "{}"),
-    ("app.checkUpdates", "Check for Updates…", None, "{}"),
     ("app.palette", "Command Palette", Some("Cmd+Shift+P"), "{}"),
     ("app.preferences", "Preferences…", Some("Cmd+,"), "{}"),
     ("app.openDialog", "Open…", None, "{purpose?}"),
@@ -295,8 +294,6 @@ pub struct SlideApp {
     pub backstage: Option<backstage::Backstage>,
     pending_urls: Vec<String>,
     print_previews: app::files::PrintPreviews,
-    #[cfg(not(target_arch = "wasm32"))]
-    updates_rt: updates_ui::Runtime,
     /// Text for the system clipboard from a Copy or Cut command, handed over on the next frame.
     pending_copy: Option<String>,
     /// Bounded screenshot completion slots for the control channel (egui 0.37 callbacks).

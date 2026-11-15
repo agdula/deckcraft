@@ -83,8 +83,6 @@ impl SlideApp {
             backstage: None,
             pending_urls: vec![],
             print_previews: files::PrintPreviews::default(),
-            #[cfg(not(target_arch = "wasm32"))]
-            updates_rt: updates_ui::Runtime::default(),
             pending_copy: None,
             capture: capture::Capture::default(),
             styled: false,
@@ -130,8 +128,7 @@ impl SlideApp {
         self.status = Some((msg.into(), now_ms()));
     }
 
-    /// Turn on the automatic check for a newer release at start-up (desktop shell only; tests and
-    /// the web build never touch the network on their own).
+    /// Compatibility entry point; updates are managed centrally and never checked in-app.
     #[cfg(not(target_arch = "wasm32"))]
     pub fn enable_update_checks(&mut self) {
         updates_ui::enable(self);
@@ -221,8 +218,6 @@ impl SlideApp {
         if !self.synthetic_batch_is_live(ctx) {
             self.drain_control(ctx);
             self.poll_opening();
-            #[cfg(not(target_arch = "wasm32"))]
-            updates_ui::tick(self, ctx);
             // Inbox results are host file bytes and do not need fonts or a painted frame. A
             // window that starts hidden must still apply a file picked before its first UI pass.
             self.drain_inbox();
@@ -350,8 +345,6 @@ impl SlideApp {
         toast::note_missing_fonts(self);
         toast::show(self, &ctx);
         dialogs::show(self, &ctx);
-        #[cfg(not(target_arch = "wasm32"))]
-        updates_ui::show(self, &ctx);
         menus::palette(self, &ctx);
         for url in std::mem::take(&mut self.pending_urls) {
             ctx.open_url(egui::OpenUrl::new_tab(url));
