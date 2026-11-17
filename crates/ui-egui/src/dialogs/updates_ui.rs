@@ -10,6 +10,8 @@ pub(crate) fn enable(_app: &mut SlideApp) {}
 
 pub(crate) fn request_check(_app: &mut SlideApp) {}
 
+pub(crate) fn start_pending_update(_app: &mut SlideApp) {}
+
 #[cfg(test)]
 mod tests {
     use super::*;
